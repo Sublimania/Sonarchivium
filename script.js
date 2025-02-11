@@ -20,26 +20,7 @@ function createTreeView(data) {
             const li = document.createElement('li');
             li.textContent = item.name;
             li.classList.add('folder');
-
-            const downloadLink = document.createElement('a');
-            downloadLink.href = `https://github.com/${repoOwner}/${repoName}/archive/refs/heads/main.zip`;
-            downloadLink.textContent = ' (Download)';
-            downloadLink.style.marginLeft = '10px';
-            downloadLink.target = '_blank';
-
-            li.appendChild(downloadLink);
-            li.onclick = function (e) {
-                e.stopPropagation();
-                const subList = li.querySelector('ul');
-                if (subList) {
-                    subList.classList.toggle('hidden');
-                } else {
-                    fetchRepoContents(item.path).then(subData => {
-                        const newUl = createTreeView(subData);
-                        li.appendChild(newUl);
-                    });
-                }
-            };
+            
             ul.appendChild(li);
         } else if (item.type === 'file' && isAudioFile(item.name)) {
             const li = document.createElement('li');
