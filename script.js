@@ -1,5 +1,5 @@
-const repoOwner = 'sonomaniac';
-const repoName = 'audio-archive';
+const repoOwner = 'sonomaniac'; 
+const repoName = 'audio-archive'; 
 const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents`;
 
 async function fetchRepoContents(path = '') {
@@ -17,16 +17,30 @@ function createTreeView(data) {
     
     data.forEach(item => {
         if (item.type === 'dir') {
+        
             const li = document.createElement('li');
             li.textContent = item.name;
             li.classList.add('folder');
-            
+            li.onclick = function (e) {
+                e.stopPropagation();
+                const subList = li.querySelector('ul');
+                if (subList) {
+                    subList.classList.toggle('hidden');
+                } else {
+                    fetchRepoContents(item.path).then(subData => {
+                        const newUl = createTreeView(subData);
+                        li.appendChild(newUl);
+                    });
+                }
+            };
             ul.appendChild(li);
         } else if (item.type === 'file' && isAudioFile(item.name)) {
+            
             const li = document.createElement('li');
             li.textContent = item.name;
             li.classList.add('audio-file');
 
+            
             const audioPlayer = document.createElement('audio');
             audioPlayer.src = item.download_url;
             audioPlayer.controls = true;
