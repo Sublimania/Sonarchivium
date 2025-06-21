@@ -12,12 +12,23 @@ const itemIDs = [
 
 const audioExtensions = ['.mp3', '.wav', '.ogg', '.flac', '.m4a'];
 
+const audioCache = new Map();
+
 function isAudioFile(fileName) {
     return audioExtensions.some(ext => fileName.toLowerCase().endsWith(ext));
 }
 
 function cleanName(name) {
     return name.trim().replace(/[\u200B-\u200D\uFEFF]/g, '');
+}
+
+function preloadAudio(url) {
+    if (!audioCache.has(url)) {
+        const a = new Audio(url);
+        a.preload = 'auto';
+        a.load();
+        audioCache.set(url, a);
+    }
 }
 
 function createFolder(name, level = 1) {
@@ -45,7 +56,7 @@ function createFolder(name, level = 1) {
     subList.style.width = 'fit-content';
     subList.style.borderRadius = '4px';
     subList.style.marginLeft = '25px';
-    subList.style.boxSizing = 'border-box';    
+    subList.style.boxSizing = 'border-box';
 
     li.appendChild(subList);
     return li;
@@ -54,21 +65,28 @@ function createFolder(name, level = 1) {
 function createAudioFileItem(itemID, file) {
     const li = document.createElement('li');
     li.classList.add('audio-file');
-    const link = document.createElement('a');
-    link.textContent = file.name;
-    link.href = `https://archive.org/details/${itemID}`;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.style.marginRight = '10px';
-    link.style.cursor = 'pointer';
-    li.appendChild(link);
 
-    const audioPlayer = document.createElement('audio');
-    audioPlayer.src = `https://archive.org/download/${itemID}/${encodeURIComponent(file.name)}`;
-    audioPlayer.controls = true;
-    audioPlayer.preload = 'auto';
-    audioPlayer.style.marginLeft = '10px';
-    li.appendChild(audioPlayer);
+    const fileNameSpan = document.createElement('span');
+    fileNameSpan.textContent = file.name;
+    fileNameSpan.style.marginRight = '10px';
+    fileNameSpan.style.cursor = 'pointer';
+    fileNameSpan.style.color = 'var(--color-accent-red)';
+    li.appendChild(fileNameSpan);
+
+    const iaLink = document.createElement('a');
+    iaLink.href = `https://archive.org/details/${itemID}`;
+    iaLink.target = '_blank';
+    iaLink.rel = 'noopener noreferrer';
+    iaLink.textContent = '[IA Page]';
+    iaLink.style.marginLeft = '10px';
+    iaLink.style.color = 'var(--color-primary)';
+    li.appendChild(iaLink);
+
+    li.addEventListener('click', () => {
+        const url = `https://archive.org/download/${itemID}/${encodeURIComponent(file.name)}`;
+        preloadAudio(url);
+        window.addToAudioQueue(file.name, url);
+    });
 
     return li;
 }
@@ -121,10 +139,9 @@ async function init() {
     const loading = document.getElementById('loading');
 
     audioList.style.visibility = 'hidden';
-
     loading.style.display = 'block';
-
     audioList.innerHTML = '';
+
     for (const itemID of itemIDs) {
         await fetchAndDisplayItem(itemID, audioList, 1);
     }

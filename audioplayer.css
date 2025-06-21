@@ -1,0 +1,83 @@
+#audio-player-container {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0; right:0;
+    background: var(--color-bg-section);
+    color: var(--color-text-white);
+    padding: 10px 15px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.7);
+    font-family: 'Courier New', monospace;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+  }
+  
+  #audio-player-controls button {
+    background: none;
+    border: none;
+    padding: 0 5px;
+    cursor: pointer;
+  }
+  
+  #audio-player-controls svg {
+    display: block;
+  }
+  
+  #autoplay-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-text-white);
+  }
+  
+  #autoplay-toggle {
+    accent-color: var(--color-primary);
+    width: 16px;
+    height: 16px;
+  }
+  
+  #audio-player-trackname {
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  #audio-player-seekbar {
+    appearance: none;
+    width: 200px;
+    height: 6px;
+    background: var(--color-border-dark);
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  #audio-player-seekbar::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    border: none;
+    margin-top: -4px;
+  }
+  
+  #audio-player-seekbar::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    border: none;
+  }
+  
+  #audio-player-timer {
+    font-size: 12px;
+    min-width: 80px;
+    text-align: right;
+  }
+  
