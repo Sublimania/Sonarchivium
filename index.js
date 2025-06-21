@@ -1,8 +1,12 @@
 const itemIDs = [
+    //Veido
     'shame-on-you-final',
-    'this-is-me_202506',
+    //Lucif Cros
+    'solar-system-zone',
+    'the-twisting-trails',
+    //Jody Parsley
     '2.-hooked',
-    'solar-system-zone'
+    'this-is-me_202506'
 ];
 
 const audioExtensions = ['.mp3', '.wav', '.ogg', '.flac', '.m4a'];
