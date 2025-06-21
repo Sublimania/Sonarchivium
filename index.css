@@ -19,7 +19,7 @@ h2 {
     font-size: 20px;
 }
 
-#music-section {
+#audio-section {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
@@ -34,10 +34,13 @@ h2 {
 ul {
     list-style-type: none;
     padding-left: 20px;
+    transition: background-color 0.3s ease;
+    border-radius: 1px;
 }
 
 ul ul {
     padding-left: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .folder {
@@ -68,12 +71,11 @@ ul ul {
     background: #bdc3c7;
 }
 
-.folder>span {
+.folder > span {
     cursor: pointer;
     display: inline-block;
-    padding: 0;
+    padding-left: 25px;
 }
-
 
 .folder:hover {
     text-decoration: underline;
@@ -143,18 +145,15 @@ a {
     left: 0px;
 }
 
-.folder>span {
-    padding-left: 25px;
-}
-
-ul {
-    list-style-type: none;
-    padding-left: 20px;
-    transition: background-color 0.3s ease;
-    border-radius: 1px;
-}
-
-ul ul {
-    padding-left: 20px;
-    transition: background-color 0.3s ease;
+#loading {
+    font-weight: bold;
+    padding: 20px;
+    color: #ddd;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #3b3b3b;
+    border: 1px solid #bdc3c780;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px #00000033;
+    margin-bottom: 20px;
 }

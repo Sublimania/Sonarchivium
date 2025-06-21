@@ -1,12 +1,13 @@
 const itemIDs = [
-    //Veido
+    // Veido
     'shame-on-you-final',
-    //Lucif Cros
+    'my-heart-belongs-to-you',
+    // Lucif Cros
     'solar-system-zone',
     'the-twisting-trails',
-    //Jody Parsley
-    '2.-hooked',
-    'this-is-me_202506'
+    // Jody Parsley
+    'this-is-me_202506',
+    'soul-streak-bw-hooked'
 ];
 
 const audioExtensions = ['.mp3', '.wav', '.ogg', '.flac', '.m4a'];
@@ -69,6 +70,19 @@ function createAudioFileItem(itemID, file) {
     return li;
 }
 
+function insertFolderAlphabetically(container, folder) {
+    const name = folder.querySelector('span').textContent.toLowerCase();
+    const children = Array.from(container.children);
+    for (let i = 0; i < children.length; i++) {
+        const childName = children[i].querySelector('span').textContent.toLowerCase();
+        if (name < childName) {
+            container.insertBefore(folder, children[i]);
+            return;
+        }
+    }
+    container.appendChild(folder);
+}
+
 async function fetchAndDisplayItem(itemID, container, level = 1) {
     try {
         const metadataURL = `https://archive.org/metadata/${itemID}`;
@@ -81,7 +95,7 @@ async function fetchAndDisplayItem(itemID, container, level = 1) {
         let artistFolder = Array.from(container.children).find(li => li.querySelector('span').textContent === artist);
         if (!artistFolder) {
             artistFolder = createFolder(artist, level);
-            container.appendChild(artistFolder);
+            insertFolderAlphabetically(container, artistFolder);
         }
 
         const trackFolder = createFolder(track, level + 1);
@@ -91,18 +105,29 @@ async function fetchAndDisplayItem(itemID, container, level = 1) {
             trackUl.appendChild(createAudioFileItem(itemID, file));
         });
 
-        artistFolder.querySelector('ul').appendChild(trackFolder);
+        insertFolderAlphabetically(artistFolder.querySelector('ul'), trackFolder);
+
+        console.log(`Loaded ${itemID} → Artist: "${artist}", Track: "${track}"`);
     } catch (error) {
         console.error(`Error loading metadata for item: ${itemID}`, error);
     }
 }
 
 async function init() {
-    const musicList = document.getElementById('music-list');
-    musicList.innerHTML = '';
+    const audioList = document.getElementById('audio-list');
+    const loading = document.getElementById('loading');
+
+    audioList.style.visibility = 'hidden';
+
+    loading.style.display = 'block';
+
+    audioList.innerHTML = '';
     for (const itemID of itemIDs) {
-        await fetchAndDisplayItem(itemID, musicList, 1);
+        await fetchAndDisplayItem(itemID, audioList, 1);
     }
+
+    loading.style.display = 'none';
+    audioList.style.visibility = 'visible';
 }
 
-document.addEventListener('DOMContentLoaded', init);  
+document.addEventListener('DOMContentLoaded', init);
