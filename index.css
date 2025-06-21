@@ -1,0 +1,160 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1b1b1b;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+h2 {
+    color: #2980b9;
+    border-bottom: 2px solid #2980b9;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+
+#music-section {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #2e2e2e;
+    border: 1px solid #bdc3c780;
+    padding: 20px;
+    padding-bottom: 80px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px #00000033;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+ul ul {
+    padding-left: 20px;
+}
+
+.folder {
+    position: relative;
+    font-weight: bold;
+    color: #27ae60;
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.folder::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    width: 2px;
+    height: 20px;
+    background: #bdc3c7;
+}
+
+.folder::after {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 10px;
+    width: 20px;
+    height: 2px;
+    background: #bdc3c7;
+}
+
+.folder>span {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0;
+}
+
+
+.folder:hover {
+    text-decoration: underline;
+}
+
+.audio-file {
+    cursor: pointer;
+    color: #e74c3c;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.audio-file:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+
+audio {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 1px 3px #0000001a;
+}
+
+#signature {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    background-color: #a5a5a5e6;
+    padding: 5px 10px;
+    border: 1px solid #bdc3c780;
+    box-shadow: 0 1px 3px #00000033;
+}
+
+#signature a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#signature a:hover {
+    text-decoration: underline;
+}
+
+#phrase {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+a {
+    color: #974ddd;
+}
+
+.folder::marker,
+.audio-file::marker {
+    content: none;
+}
+
+.folder::before,
+.folder::after {
+    left: 0px;
+}
+
+.folder>span {
+    padding-left: 25px;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 20px;
+    transition: background-color 0.3s ease;
+    border-radius: 1px;
+}
+
+ul ul {
+    padding-left: 20px;
+    transition: background-color 0.3s ease;
+}
