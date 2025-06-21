@@ -1,8 +1,8 @@
 const itemIDs = [
     'shame-on-you-final',
+    'this-is-me_202506',
     '2.-hooked',
-    'solar-system-zone',
-    'this-is-me_202506'
+    'solar-system-zone'
 ];
 
 const audioExtensions = ['.mp3', '.wav', '.ogg', '.flac', '.m4a'];
