@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://sublimania.github.io/audio-archive/" />
     <meta property="og:type" content="website" />
 
-    <title>The Sonomaniac's Audio Archival</title>
+    <title>Sonarchivium: The Sonomaniac's Audio Archival...</title>
 
     <link rel="stylesheet" href="index.css" />
     <link rel="preload" href="index.js" as="script" />
@@ -21,9 +21,12 @@
 </head>
 
 <body>
-    <h1><a href="https://archive.org/details/@xlucifxcrosx">IA Page</a></h1>
+    <h1 id="headertitle">Sonarchivium:</h1>
+    <h3 id="subtitle">The Sonomaniac's Audio Archival</h3>
     <div id="audio-section">
-        <h2>Archives</h2>
+        <div id="archive-header">
+            <h2>Archives...</h2>
+        </div>
 
         <div id="loading" style="font-weight: bold; padding: 20px;">Loading, please wait...</div>
         <ul id="audio-list"></ul>
@@ -33,9 +36,24 @@
         </div>
 
         <div id="signature">
-            <a href="info.txt" target="_blank" rel="noopener noreferrer" id="signature-link">Signed: Lucif Cros, aka X.</a>
+            <a href="info.txt" target="_blank" rel="noopener noreferrer" id="signature-link">Signed: Lucif Cros, aka
+                X.</a>
         </div>
     </div>
+    <div id="repo-section">
+        <h1>
+            <a href="https://archive.org/details/@xlucifxcrosx" id="repo">
+                <span id="big">
+                    Repository Page
+                </span>
+                <br>
+                <span id="tiny">
+                    (Internet Archive/archive.org)
+                </span>
+            </a>
+        </h1>
+    </div>
+
 </body>
 
 </html>

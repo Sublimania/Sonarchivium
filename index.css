@@ -1,80 +1,107 @@
+:root {
+    --color-bg-main: #1b1b1b;
+    --color-bg-section: #2e2e2e;
+    --color-bg-loading: #3b3b3b;
+    --color-text-main: #333333;
+    --color-text-light: #ddd;
+    --color-text-white: #ffffff;
+    --color-text-muted: #cecece;
+    --color-primary: #8c4dc7;
+    --color-primary-dark: #2c3e50;
+    --color-accent-green: #27ae60;
+    --color-accent-red: #e74c3c;
+    --color-border-light: #bdc3c780;
+    --color-border: #bdc3c7;
+    --color-border-dark: #424242;
+    --color-shadow-light: #0000001a;
+    --color-shadow: #00000033;
+    --color-signature-bg: #a5a5a5e6;
+    --color-signature-text-shadow: #ffffff;
+}
+
 body {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #1b1b1b;
-    color: #333;
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
     margin: 0;
     padding: 20px;
 }
 
 h1 {
     text-align: center;
-    color: #2c3e50;
+    color: var(--color-primary-dark);
     font-size: 24px;
 }
 
 h2 {
-    color: #2980b9;
-    border-bottom: 2px solid #2980b9;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
     padding-bottom: 5px;
     font-size: 20px;
+    margin: 10px 10px 10px 10px;
 }
 
 #audio-section {
     position: relative;
     max-width: 800px;
-    margin: 0 auto;
-    background-color: #2e2e2e;
-    border: 1px solid #bdc3c780;
-    padding: 20px;
-    padding-bottom: 80px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px #00000033;
+    margin: 0 auto 25px;
+    background-color: var(--color-bg-section);
+    border: 1px solid var(--color-border-light);
+    padding: 0;
+    box-shadow: 0 2px 5px var(--color-shadow);
+    box-sizing: border-box;
+}
+
+#archive-header {
+    position: relative;
+    width: 100%;
+    background-color: var(--color-bg-loading);
+    border: 1px solid var(--color-border-light);
+    border-radius: 2px;
+    margin: 0 0 10px 0;
+    box-sizing: border-box;
+}
+
+#audio-list {
+    margin-bottom: 10%;
 }
 
 ul {
     list-style-type: none;
     padding-left: 20px;
-    transition: background-color 0.3s ease;
     border-radius: 1px;
 }
 
 ul ul {
     padding-left: 20px;
-    transition: background-color 0.3s ease;
 }
 
 .folder {
     position: relative;
     font-weight: bold;
-    color: #27ae60;
+    color: var(--color-accent-green);
     margin: 20px 0;
     font-size: 18px;
 }
 
-.folder::before {
-    content: '';
-    position: absolute;
-    left: -20px;
-    top: 10px;
-    width: 2px;
-    height: 20px;
-    background: #bdc3c7;
-}
-
-.folder::after {
-    content: '';
-    position: absolute;
-    left: -20px;
-    top: 10px;
-    width: 20px;
-    height: 2px;
-    background: #bdc3c7;
-}
-
-.folder > span {
+.folder>span {
     cursor: pointer;
     display: inline-block;
     padding-left: 25px;
+    user-select: none;
+}
+
+.folder>span::before {
+    content: "▶";
+    display: inline-block;
+    width: 1em;
+    margin-left: -20px;
+    margin-right: 6px;
+    transition: transform 0.2s ease;
+}
+
+.folder.open>span::before {
+    content: "▼";
 }
 
 .folder:hover {
@@ -83,9 +110,16 @@ ul ul {
 
 .audio-file {
     cursor: pointer;
-    color: #e74c3c;
     margin: 5px 0;
     font-size: 16px;
+}
+
+.audio-file::before {
+    content: "–";
+    color: var(--color-accent-red);
+    margin-right: 10px;
+    display: inline-block;
+    width: 1em;
 }
 
 .audio-file:hover {
@@ -101,7 +135,7 @@ audio {
     margin-top: 10px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 1px 3px #0000001a;
+    box-shadow: 0 1px 3px var(--color-shadow-light);
 }
 
 #signature {
@@ -110,15 +144,16 @@ audio {
     right: 10px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
-    background-color: #a5a5a5e6;
+    background-color: var(--color-signature-bg);
     padding: 5px 10px;
-    border: 1px solid #bdc3c780;
-    box-shadow: 0 1px 3px #00000033;
+    border: 1px solid var(--color-border-light);
+    box-shadow: 0 1px 3px var(--color-shadow);
+    text-shadow: var(--color-signature-text-shadow);
 }
 
 #signature a {
     text-decoration: none;
-    color: #ffffff;
+    color: var(--color-text-white);
 }
 
 #signature a:hover {
@@ -132,7 +167,7 @@ audio {
 }
 
 a {
-    color: #974ddd;
+    color: var(--color-primary);
 }
 
 .folder::marker,
@@ -140,20 +175,61 @@ a {
     content: none;
 }
 
-.folder::before,
-.folder::after {
-    left: 0px;
-}
-
 #loading {
     font-weight: bold;
     padding: 20px;
-    color: #ddd;
+    color: var(--color-text-light);
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
-    background-color: #3b3b3b;
-    border: 1px solid #bdc3c780;
+    background-color: var(--color-bg-loading);
+    border: 1px solid var(--color-border-light);
     border-radius: 4px;
-    box-shadow: 0 2px 5px #00000033;
-    margin-bottom: 20px;
+    box-shadow: 0 2px 5px var(--color-shadow);
+    margin: 0 auto 20px;
+    width: 75%;
+}
+
+#headertitle {
+    font-size: 64px;
+    color: var(--color-accent-red);
+}
+
+#subtitle {
+    font-size: 32px;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-top: -2.5%;
+}
+
+#tiny {
+    font-size: 12px;
+}
+
+a #tiny {
+    text-decoration: overline;
+}
+
+a #big {
+    text-decoration: underline;
+}
+
+a#repo {
+    text-decoration: none;
+}
+
+.audio-file a {
+    color: var(--color-accent-red);
+}
+
+#repo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: var(--color-bg-loading);
+    width: 15%;
+    height: 100%;
+    border: 1px solid var(--color-border-light);
+    border-radius: 2px;
+    text-align: center;
 }

@@ -31,6 +31,7 @@ function createFolder(name, level = 1) {
         const subList = li.querySelector('ul');
         if (subList) {
             subList.classList.toggle('hidden');
+            li.classList.toggle('open');
         }
     });
     li.appendChild(span);
@@ -40,9 +41,11 @@ function createFolder(name, level = 1) {
     subList.style.backgroundColor = `rgba(0, 0, 0, ${Math.min(level * 0.15, 0.5)})`;
     const borderAlpha = Math.min(level * 0.1, 0.3);
     subList.style.border = `1px solid rgba(255, 255, 255, ${borderAlpha})`;
-    subList.style.padding = '10px';
+    subList.style.padding = '0px 25px';
+    subList.style.width = 'fit-content';
     subList.style.borderRadius = '4px';
-    subList.style.marginLeft = '10px';
+    subList.style.marginLeft = '25px';
+    subList.style.boxSizing = 'border-box';    
 
     li.appendChild(subList);
     return li;
